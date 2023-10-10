@@ -19,7 +19,7 @@ public:
 
 
 template<typename T>
-class biderectional_iterator // двунаправ(не кольцевой).список
+class biderectional_iterator // РґРІСѓРЅР°РїСЂР°РІ(РЅРµ РєРѕР»СЊС†РµРІРѕР№).СЃРїРёСЃРѕРє
 {
 private:
 	node<T>* item;
@@ -91,7 +91,7 @@ public:
 	using defference_type = signed int;
 	using size_type = unsigned int;
 
-	constexpr MyList() = default; // можно вызывать на этапе компиляции, иначе выполняется компиляция ссылки на экземпляр класс шаблон функции "MyList<T>"
+	MyList() = default;
 	MyList(MyList& a) {
 		head = a.head;
 		tail = a.tail;
@@ -105,14 +105,14 @@ public:
 	~MyList() = default;
 
 	MyList& operator=(MyList& a) {
-		if (this->begin() != a.begin() and this->end() != a.end() and this->size != a.size) { //двигаеемся по списку пока не найдём a
+		if (this->begin() != a.begin() and this->end() != a.end() and this->size != a.size) { //РґРІРёРіР°РµРµРјСЃСЏ РїРѕ СЃРїРёСЃРєСѓ РїРѕРєР° РЅРµ РЅР°Р№РґС‘Рј a
 			head = a.head;
 			tail = a.tail;
 			size = a.size;
 		}
 		return *this;
 	}
-	MyList& operator=(MyList&& a) { //  уничтожение или move-assings из списка
+	MyList& operator=(MyList&& a) { //  СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РёР»Рё move-assings РёР· СЃРїРёСЃРєР°
 		if (this->begin() != a.begin() and this->end() != a.end() and this->size != a.size) {
 			head = a.head;
 			a.head = nullptr;
@@ -122,16 +122,16 @@ public:
 		return *this;
 	}
 
-	constexpr iterator begin() {
+	iterator begin() {
 		return head;
 	}
-	constexpr iterator end() {
+	iterator end() {
 		return tail;
 	}
-	constexpr const_iterator cbegin() {
+	const_iterator cbegin() {
 		return begin();
 	}
-	constexpr const_iterator cend() {
+	const_iterator cend() {
 		return end();
 	}
 	bool operator==(MyList& a) {
@@ -143,32 +143,32 @@ public:
 	void swap(MyList& a) {
 		std::swap(*this, a);
 	}
-	constexpr size_type current_size() {
+	size_type current_size() {
 		return size;
 	}
 	size_type max_size() const {
 		return sizeof(size_type) / sizeof(T);
 
 	}
-	constexpr bool empty() {
+	bool empty() {
 		return this->begin() == this->end();
 	}
 
 	bool search(std::string name)
 	{
 		iterator iter = begin();
-		for (int i : (0, (int)size)) // должно рабоатть с constexpr
+		for (int i : (0, (int)size)) // РґРѕР»Р¶РЅРѕ СЂР°Р±РѕР°С‚С‚СЊ СЃ constexpr
 		{
 			if (iter.operator*().name == name)
 			{
-				return true; // Элем найден
+				return true; // Р­Р»РµРј РЅР°Р№РґРµРЅ
 			}
 		}
-		return false; // Элем не найден
+		return false; // Р­Р»РµРј РЅРµ РЅР°Р№РґРµРЅ
 	}
 
 	void push_back(const T& value, std::conditional<std::is_same<T, Classes::DK>::value, double, int> term, std::string name) {
-		if (size == 0) { // Если списка нет, то создать
+		if (size == 0) { // Р•СЃР»Рё СЃРїРёСЃРєР° РЅРµС‚, С‚Рѕ СЃРѕР·РґР°С‚СЊ
 			head = new node<T>();
 			head->next = nullptr;
 			head->item = value;
