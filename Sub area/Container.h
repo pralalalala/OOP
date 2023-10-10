@@ -157,7 +157,7 @@ public:
 	bool search(std::string name)
 	{
 		iterator iter = begin();
-		for (int i : (0, (int)size)) // должно рабоатть с constexpr
+		for (int i : (0, (int)size))
 		{
 			if (iter.operator*().name == name)
 			{
