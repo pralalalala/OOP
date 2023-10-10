@@ -9,7 +9,7 @@ template<typename T>
 class node {
 public:
 
-	using undef_type = std::conditional<std::is_same<T, Classes::DK>::value, double, int>;
+	using undef_type = std::conditional<std::is_same<T, Classes::DK>::value, double, int>; // Вопрос: Зачем undef_type и для чего. (я хз)
 
 	T item;
 	std::string name;
@@ -19,7 +19,8 @@ public:
 
 
 template<typename T>
-class biderectional_iterator // двунаправ(не кольцевой).список
+class biderectional_iterator //Почему именно biderectional? Можешь взять любой список с указателями
+	//главное сказать ей что ты делал на примере своего списка когда его задавали на фунде, У меня был типо двунаправ(не кольцевой).список
 {
 private:
 	node<T>* item;
@@ -143,7 +144,7 @@ public:
 	void swap(MyList& a) {
 		std::swap(*this, a);
 	}
-	size_type current_size() {
+	constexpr size_type current_size() {
 		return size;
 	}
 	size_type max_size() const {
@@ -157,7 +158,7 @@ public:
 	bool search(std::string name)
 	{
 		iterator iter = begin();
-		for (int i : (0, (int)size))
+		for (int i : (0, (int)size)) 
 		{
 			if (iter.operator*().name == name)
 			{
