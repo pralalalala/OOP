@@ -6,7 +6,7 @@
 
 int main()
 {
-	Classes::Component* light = new Classes::DK; // класс ДК
+	Classes::Component* NordGuild = new Classes::DK; // класс ДК
 
 	MyList<Classes::DK> list = MyList<Classes::DK>();
 
